@@ -123,12 +123,23 @@ Polymarket Leaderboard
 Built in Go + Bubble Tea (same Catppuccin Mocha theme as career-ops):
 
 ```bash
-cd dashboard
-go build -o polymarket-dashboard .
-./polymarket-dashboard
+make setup
+make build
+make dashboard
 ```
 
 Features: 6 filter tabs (All/Open/Closed/Paper/A-Grade/Winning), P&L stats, trade detail panel.
+
+### Developer Commands
+
+```bash
+make help
+make dashboard
+make watch-reports
+make watch-report-one WALLET=0x...
+make scan-report
+make test
+```
 
 ---
 

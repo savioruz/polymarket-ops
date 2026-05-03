@@ -57,11 +57,9 @@ nano config/profile.yml    # Set portfolio_size, risk settings
 nano config/watchlist.yml  # Add whale wallets (find via leaderboard scan)
 nano .env                  # Add POLYMARKET_PRIVATE_KEY (for trading)
 
-# 4. Build dashboard
-cd dashboard
-go mod tidy
-go build -o polymarket-dashboard .
-cd ..
+# 4. Prepare and build dashboard
+make setup
+make build
 ```
 
 ---
@@ -101,6 +99,21 @@ opencode
 /polymarket-batch
 ```
 
+### Dashboard Workflow
+
+```bash
+# Run the TUI directly
+make dashboard
+
+# Generate reports from root
+make watch-reports
+make watch-report-one WALLET=0xWHALE_ADDRESS
+make scan-report
+
+# Run Go tests for dashboard module
+make test
+```
+
 ### When You See a Signal
 
 ```bash
@@ -113,7 +126,7 @@ opencode
 ```bash
 /polymarket portfolio
 # Or open the dashboard:
-./dashboard/polymarket-dashboard
+make dashboard
 ```
 
 ---
