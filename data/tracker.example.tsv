@@ -1,0 +1,5 @@
+timestamp	market_slug	condition_id	token_id	side	entry_price	size_usdc	whale_wallet	trader_grade	signal_score	exit_price	exit_date	pnl_pct	status	notes
+# Copy trades are logged to data/tracker.tsv (local, gitignored)
+# Status: open | closed | cancelled | paper
+# Example row below (delete this):
+# 2025-01-15T10:30:00Z	will-btc-hit-100k	0xABC123	0xTOKEN456	buy	0.32	150.00	0xWHALE789	A	4.7				open	Grade A signal, fresh entry

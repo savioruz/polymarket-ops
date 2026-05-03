@@ -27,7 +27,7 @@ This mode answers: *"What's happening in the world that affects my open position
 Read these files first:
 - `modes/_shared.md` — preferred categories
 - `config/watchlist.yml` — active whale wallets
-- `data/tracker.tsv` — your open positions (markets to prioritize)
+- `data/tracker.tsv` — your local (gitignored) open positions (markets to prioritize)
 
 Extract all unique market slugs/questions from open positions and copy signals. These become your **priority topics**.
 

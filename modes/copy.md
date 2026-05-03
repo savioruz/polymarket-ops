@@ -183,7 +183,7 @@ If `execution_mode: chrome`, execute the same order parameters in the browser fl
 
 ### 4. Log to Tracker
 
-Append to `data/tracker.tsv`:
+Append to `data/tracker.tsv` (local, gitignored; schema in `data/tracker.example.tsv`):
 ```
 {timestamp}\t{market_slug}\t{condition_id}\t{token_id}\t{side}\t{entry_price}\t{size_usdc}\t{whale_wallet}\t{trader_grade}\t{signal_score}\topen
 ```

@@ -108,7 +108,7 @@ Default position sizing (configurable in `config/profile.yml`):
 
 - `config/profile.yml` — Your risk settings, wallet address, copy limits
 - `config/watchlist.yml` — Wallets you're monitoring
-- `data/tracker.tsv` — All copy trades log
+- `data/tracker.tsv` — Local (gitignored) copy trades log, created from `data/tracker.example.tsv`
 - `data/positions.json` — Active positions snapshot
 - `reports/` — Markdown analysis reports per wallet/trade
 - `modes/_shared.md` — Shared context, risk appetite, portfolio size
@@ -120,7 +120,7 @@ Default position sizing (configurable in `config/profile.yml`):
 1. **Always run `polymarket data positions` before copying** — check if the whale already exited
 2. **Check market liquidity** before placing — minimum $10k volume recommended
 3. **Price slippage**: if whale entry was >5% away from current price, flag as stale
-4. **Log every action** to `data/tracker.tsv`
+4. **Log every action** to `data/tracker.tsv` (local, gitignored)
 5. **Never place orders without confirming** with the user unless auto-mode is set in profile
 
 ---
@@ -131,7 +131,7 @@ At startup, always read:
 1. `modes/_shared.md` — portfolio size, risk settings
 2. `config/profile.yml` — your configuration
 3. `config/watchlist.yml` — tracked wallets
-4. `data/tracker.tsv` — recent trades history
+4. `data/tracker.tsv` — recent trades history (local, gitignored; use `data/tracker.example.tsv` as schema)
 
 ---
 

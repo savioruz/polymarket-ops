@@ -28,7 +28,7 @@ Always read in this order before taking action:
 1. `modes/_shared.md` — risk appetite, portfolio limits, reporting style
 2. `config/profile.yml` — the user's live config (portfolio size, risk rules, grades)
 3. `config/watchlist.yml` — wallets being tracked
-4. `data/tracker.tsv` — log of past copy trades
+4. `data/tracker.tsv` — local (gitignored) log of past copy trades; bootstrap from `data/tracker.example.tsv`
 
 ---
 
@@ -106,7 +106,7 @@ Always re-read `config/profile.yml` before calculating size; the user may have c
 - **Scan reports:** `reports/scan-{YYYY-MM-DD}.md`
 - **Watch reports:** `reports/watch-{WALLET_SHORT}-{DATE}.md`
 - **Batch reports:** `reports/batch-signals-{DATE}.md`
-- **Tracker log:** append TSV rows to `data/tracker.tsv` (tab-separated, 14+ columns)
+- **Tracker log:** append TSV rows to `data/tracker.tsv` (tab-separated, 14+ columns, local/gitignored). Schema template: `data/tracker.example.tsv`.
 - Use markdown tables for comparisons.
 - Flag warnings with ⚠️, recommendations with ✅, vetoes with ❌.
 - Keep reports concise (≈2 pages).

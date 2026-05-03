@@ -165,7 +165,7 @@ Set in `config/profile.yml`:
 paper_trading: true
 ```
 
-All signals will be logged to `data/tracker.tsv` with status=paper but no real orders placed. Great way to validate the system before committing real money.
+All signals will be logged to `data/tracker.tsv` (local, gitignored) with status=paper but no real orders placed. If missing, copy `data/tracker.example.tsv` to `data/tracker.tsv` first. Great way to validate the system before committing real money.
 
 ---
 

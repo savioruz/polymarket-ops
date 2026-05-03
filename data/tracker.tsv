@@ -1,8 +1,0 @@
-timestamp	market_slug	condition_id	token_id	side	entry_price	size_usdc	whale_wallet	trader_grade	signal_score	exit_price	exit_date	pnl_pct	status	notes
-# Copy trades will be logged here automatically by the copy mode
-# Status: open | closed | cancelled | paper
-# Example row below (delete this):
-# 2025-01-15T10:30:00Z	will-btc-hit-100k	0xABC123	0xTOKEN456	buy	0.32	150.00	0xWHALE789	A	4.7			open	Grade A signal, fresh entry
-2026-05-03T05:02:28Z	lal-cel-elc-2026-05-03-total-2pt5	0x59b028a160561152e88eed2ba075024679c915a0c5937f6329a70a5f158eb115	26945796563743928251874993345994426010736152115610394952543072736921259961420	buy	0.43	2.15	0x204f72f35326db932158CBA6AdfF0B9A1DA95e14	A	4.0				open	CONFIRM received; copied whale Under 2.5 position
-2026-05-03T08:46:29Z	epl-eve-mac-2026-05-04-mac	0x998d69f881036ac580f6dc0a18b6c3ec48f167fd00799db9e58bf43e07b4b27e	65644943731173133138705009478452522721335603156906993620934347134543808484110	buy	0.6699	4.9999	N/A	N/A	N/A				open	backfilled from wallet open positions (non -100%)
-2026-05-03T08:46:29Z	epl-mun-liv-2026-05-03-liv	0x33c213f2b4b778137555ec9c690ae02face2450ec234b48c02e1a5b94400fe29	90785645241039247701705592774836333814669339864663225713759053825133310303149	buy	0.3399	0.9999	N/A	N/A	N/A				open	backfilled from wallet open positions (non -100%)

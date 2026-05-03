@@ -9,6 +9,8 @@ config/watchlist.yml
 # Generated data
 data/positions.json
 data/*.bak
+# Local trade log (template in data/tracker.example.tsv)
+data/tracker.tsv
 
 # Reports
 reports/

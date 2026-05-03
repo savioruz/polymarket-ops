@@ -36,7 +36,7 @@ polymarket clob balance --asset-type collateral --output json
 
 ### 2. Cross-reference with Tracker
 
-Read `data/tracker.tsv` to get copy trade metadata (which whale, signal score, etc.)
+Read `data/tracker.tsv` (local, gitignored) to get copy trade metadata (which whale, signal score, etc.)
 
 ### 3. Output Report
 
