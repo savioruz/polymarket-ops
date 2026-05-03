@@ -26,11 +26,6 @@ var (
 			Foreground(lipgloss.Color("#CBA6F7")). // Catppuccin Mocha mauve
 			MarginBottom(1)
 
-	headerStyle = lipgloss.NewStyle().
-			Bold(true).
-			Foreground(lipgloss.Color("#89B4FA")). // Catppuccin Mocha blue
-			Underline(true)
-
 	greenStyle  = lipgloss.NewStyle().Foreground(lipgloss.Color("#A6E3A1")) // green
 	redStyle    = lipgloss.NewStyle().Foreground(lipgloss.Color("#F38BA8")) // red
 	yellowStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("#F9E2AF")) // yellow
@@ -39,11 +34,6 @@ var (
 	selectedStyle = lipgloss.NewStyle().
 			Background(lipgloss.Color("#313244")).
 			Foreground(lipgloss.Color("#CDD6F4"))
-
-	borderStyle = lipgloss.NewStyle().
-			Border(lipgloss.RoundedBorder()).
-			BorderForeground(lipgloss.Color("#6C7086")).
-			Padding(0, 1)
 )
 
 // ─── Data Types ───────────────────────────────────────────────────────────────
@@ -91,6 +81,7 @@ func initialModel(trackerPath, repoRoot string) model {
 		repoRoot:    repoRoot,
 	}
 	m.trades = loadTrades(trackerPath)
+
 	return m
 }
 
@@ -98,7 +89,9 @@ func generateWatchReportsCmd(repoRoot string) tea.Cmd {
 	return func() tea.Msg {
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Minute)
 		defer cancel()
+
 		summary, err := watch.RunAll(ctx, repoRoot)
+
 		return watchReportsDoneMsg{summary: summary, err: err}
 	}
 }
@@ -108,23 +101,31 @@ func loadTrades(path string) []Trade {
 	if err != nil {
 		return []Trade{}
 	}
-	defer f.Close()
+
+	defer func() {
+		_ = f.Close()
+	}()
 
 	r := csv.NewReader(bufio.NewReader(f))
 	r.Comma = '\t'
 	r.LazyQuotes = true
 
 	var trades []Trade
+
 	firstRow := true
+
 	for {
 		row, err := r.Read()
 		if err == io.EOF {
 			break
 		}
+
 		if err != nil || firstRow {
 			firstRow = false
+
 			continue
 		}
+
 		if len(row) < 14 || strings.HasPrefix(row[0], "#") {
 			continue
 		}
@@ -159,8 +160,10 @@ func loadTrades(path string) []Trade {
 		if trades[i].Status != trades[j].Status {
 			return trades[i].Status == "open"
 		}
+
 		return trades[i].Timestamp > trades[j].Timestamp
 	})
+
 	return trades
 }
 
@@ -168,11 +171,13 @@ func safeIdx(s []string, i int) string {
 	if i < len(s) {
 		return s[i]
 	}
+
 	return ""
 }
 
 func (m model) filteredTrades() []Trade {
 	var out []Trade
+
 	for _, t := range m.trades {
 		switch m.tab {
 		case 0:
@@ -199,6 +204,7 @@ func (m model) filteredTrades() []Trade {
 			}
 		}
 	}
+
 	return out
 }
 
@@ -213,6 +219,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.height = msg.Height
 	case tea.KeyMsg:
 		filtered := m.filteredTrades()
+
 		switch msg.String() {
 		case "q", "ctrl+c":
 			return m, tea.Quit
@@ -237,8 +244,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			if m.generating {
 				return m, nil
 			}
+
 			m.generating = true
 			m.status = "generating watch reports..."
+
 			return m, generateWatchReportsCmd(m.repoRoot)
 		}
 	case watchReportsDoneMsg:
@@ -249,6 +258,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.status = fmt.Sprintf("generated %d watch report(s)", len(msg.summary.Reports))
 		}
 	}
+
 	return m, nil
 }
 
@@ -270,9 +280,12 @@ func (m model) View() string {
 				Bold(true).
 				Padding(0, 1)
 		}
+
 		b.WriteString(style.Render(t) + " ")
 	}
+
 	b.WriteString("  " + grayStyle.Render("tab/shift+tab to switch • r reload • g watch reports • q quit") + "\n\n")
+
 	if m.status != "" {
 		b.WriteString(grayStyle.Render("status: "+m.status) + "\n\n")
 	}
@@ -283,12 +296,15 @@ func (m model) View() string {
 	wins := 0
 	total := 0
 	totalPnL := 0.0
+
 	for _, t := range all {
 		if t.Status == "open" {
 			open++
 		}
+
 		if t.Status == "closed" {
 			total++
+
 			if t.PnLPct > 0 {
 				wins++
 				totalPnL += t.PnLPct
@@ -297,10 +313,12 @@ func (m model) View() string {
 			}
 		}
 	}
+
 	winRate := 0.0
 	if total > 0 {
 		winRate = float64(wins) / float64(total) * 100
 	}
+
 	avgPnL := 0.0
 	if total > 0 {
 		avgPnL = totalPnL / float64(total)
@@ -311,17 +329,19 @@ func (m model) View() string {
 	b.WriteString(grayStyle.Render(stats) + "\n\n")
 
 	// Table header
-	b.WriteString(fmt.Sprintf("%-30s  %-4s  %-7s  %-7s  %-6s  %-7s  %-6s  %-8s  %s\n",
-		"Market", "Side", "Entry", "Current", "Size", "Grade", "Score", "Status", "P&L"))
+	fmt.Fprintf(&b, "%-30s  %-4s  %-7s  %-7s  %-6s  %-7s  %-6s  %-8s  %s\n",
+		"Market", "Side", "Entry", "Current", "Size", "Grade", "Score", "Status", "P&L")
 	b.WriteString(strings.Repeat("─", 95) + "\n")
 
 	// Rows
 	filtered := m.filteredTrades()
 	visibleStart := 0
+
 	maxRows := m.height - 15
 	if maxRows < 5 {
 		maxRows = 5
 	}
+
 	if m.cursor >= visibleStart+maxRows {
 		visibleStart = m.cursor - maxRows + 1
 	}
@@ -335,6 +355,7 @@ func (m model) View() string {
 		}
 
 		side := strings.ToUpper(t.Side)
+
 		sideStyled := greenStyle.Render(side)
 		if side == "SELL" || side == "NO" {
 			sideStyled = redStyle.Render(side)
@@ -345,6 +366,7 @@ func (m model) View() string {
 		score := fmt.Sprintf("%.1f", t.SignalScore)
 
 		pnlStr := ""
+
 		if t.Status == "closed" && t.PnLPct != 0 {
 			if t.PnLPct > 0 {
 				pnlStr = greenStyle.Render(fmt.Sprintf("+%.1f%%", t.PnLPct))
@@ -358,10 +380,12 @@ func (m model) View() string {
 		}
 
 		grade := t.TraderGrade
+
 		gradeStyled := grayStyle.Render(grade)
-		if grade == "A" {
+		switch grade {
+		case "A":
 			gradeStyled = greenStyle.Render(grade)
-		} else if grade == "B" {
+		case "B":
 			gradeStyled = yellowStyle.Render(grade)
 		}
 
@@ -371,6 +395,7 @@ func (m model) View() string {
 		if i == m.cursor {
 			line = selectedStyle.Render(line)
 		}
+
 		b.WriteString(line + "\n")
 	}
 
@@ -379,6 +404,7 @@ func (m model) View() string {
 		t := filtered[m.cursor]
 		detail := fmt.Sprintf("\n  Market: %s\n  Whale: %s  |  Notes: %s",
 			t.MarketSlug, t.WhaleWallet, t.Notes)
+
 		b.WriteString(grayStyle.Render(strings.Repeat("─", 95)) + "\n")
 		b.WriteString(grayStyle.Render(detail) + "\n")
 	}
@@ -388,6 +414,7 @@ func (m model) View() string {
 
 func main() {
 	trackerPath := "data/tracker.tsv"
+
 	repoRoot := "."
 	if len(os.Args) > 1 {
 		repoRoot = os.Args[1]

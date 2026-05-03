@@ -47,6 +47,15 @@ polymarket clob book TOKEN_ID --output json
 polymarket clob last-trade TOKEN_ID --output json
 ```
 
+### 2.5 Domain Overlay (Sports / Esports)
+
+Before finalizing copy scores for a position, route to domain-specific context when applicable:
+
+- If market category/title indicates traditional sports (soccer, NBA, NFL, tennis, F1, etc.), load `modes/sport.md` and apply H2H + injury/context checks.
+- If market category/title indicates esports (CS2, LoL, Dota2, Valorant, etc.), load `modes/esport.md` and apply patch/roster/map-pool checks.
+
+Use the domain-adjusted signal score as the final score in this watch report.
+
 ### 3. Copy Signal Scoring
 
 For each open position, calculate a **Copy Signal Score** (1-5):

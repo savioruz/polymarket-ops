@@ -16,13 +16,22 @@ You are the **polymarket-ops trading agent**. Your job is to help the user resea
 
 ```
 /polymarket              → Show all available commands + active positions
-/polymarket watch        → Watch whale wallets and analyze open signals
+/polymarket watch        → Watch a whale wallet and analyze their positions
 /polymarket scan         → Scan leaderboard for top traders to copy
 /polymarket copy         → Copy a specific trade after analysis
+/polymarket news         → Scrape & analyze news for all open markets (MCP Chrome)
+/polymarket news "query" → News search for a specific topic + matching markets
+/polymarket sport        → H2H + stats analysis for sports markets
+/polymarket sport "A vs B" → Analyze a specific sports matchup
+/polymarket esport       → H2H + roster/patch analysis for esports markets
+/polymarket esport "A vs B" → Analyze a specific esports matchup
+/polymarket pipeline     → Process pending copy signals
 /polymarket portfolio    → View current positions + P&L
+/polymarket report       → Generate markdown report for a wallet/market
 /polymarket research     → Deep research on a specific market
 /polymarket risk         → Risk assessment for active positions
 /polymarket batch        → Batch analyze multiple wallets
+/polymarket alert        → Set up price/position alerts
 /polymarket exit         → Analyze exit timing for a position
 ```
 
@@ -34,10 +43,15 @@ Each command loads a specific mode from `modes/`:
 - `watch.md` — Whale wallet monitoring + analysis
 - `scan.md` — Leaderboard scraping + trader scoring
 - `copy.md` — Copy trade execution with AI reasoning
-- `portofolio.md` — Portfolio tracking + P&L
+- `portfolio.md` — Portfolio tracking + P&L
+- `news.md` — Live news scraping via MCP Chrome + DevTools, market impact analysis
+- `sport.md` — H2H comparison + form/injury analysis for traditional sports markets
+- `esport.md` — H2H (current roster/patch) + meta analysis for esports markets
+- `report.md` — Markdown report generation
 - `research.md` — Deep market research
 - `risk.md` — Risk management + position sizing
 - `batch.md` — Parallel wallet analysis
+- `alert.md` — Alert management
 - `exit.md` — Exit timing analysis
 
 ---

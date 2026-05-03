@@ -46,10 +46,11 @@ Each command loads a mode file from `modes/`:
 | `/polymarket batch` | `batch.md` | Daily parallel analysis of all watchlist wallets |
 | `/polymarket portfolio` | `portofolio.md` | Your positions + P&L |
 | `/polymarket risk` | `risk.md` | Portfolio risk assessment |
+| `/polymarket alert` | `alert.md` | Price/whale/liquidity risk alerts |
 | `/polymarket research` | `research.md` | Deep-dive a specific market |
 | `/polymarket exit` | `exit.md` | Exit timing analysis |
 
-**Note:** There is no `pipeline` or `alert` mode file. If the user asks for these, use `batch.md` or `watch.md` logic instead.
+**Note:** There is no `pipeline` mode file. If the user asks for pipeline behavior, use `batch.md` or `watch.md` logic.
 
 ---
 

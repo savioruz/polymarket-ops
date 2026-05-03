@@ -27,6 +27,7 @@ func TestRecommendationForScore(t *testing.T) {
 
 func TestReportFilename(t *testing.T) {
 	f := reportFilename("0x204f72f35326db932158cba6adff0b9a1da95e14", time.Date(2026, 5, 3, 0, 0, 0, 0, time.UTC))
+
 	want := "watch-204f72f3-2026-05-03.md"
 	if f != want {
 		t.Fatalf("got %q want %q", f, want)
@@ -36,6 +37,7 @@ func TestReportFilename(t *testing.T) {
 func TestRenderMarkdownHasSections(t *testing.T) {
 	r := WalletReport{Wallet: Wallet{Address: "0xabc", Grade: "A"}, Date: "2026-05-03"}
 	out := renderMarkdown(r)
+
 	need := []string{
 		"## Open Positions - Copy Signals",
 		"## Strong Copy Opportunities",

@@ -26,6 +26,7 @@ func TestGradeFromScore(t *testing.T) {
 func TestRenderIncludesRequiredSections(t *testing.T) {
 	report := Report{Date: "2026-05-03"}
 	md := renderMarkdown(report)
+
 	required := []string{
 		"## Top Traders Ranked",
 		"## Recommended Watchlist Updates",

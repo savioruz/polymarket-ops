@@ -4,7 +4,7 @@ DASHBOARD_DIR := dashboard
 BIN_DIR := bin
 GO := go
 
-.PHONY: help build dashboard-build run dashboard dashboard-run watch-reports watch-report-one scan-report scan-report-build test setup
+.PHONY: help build dashboard-build run dashboard dashboard-run watch-reports watch-report-one scan-report scan-report-build test lint lint-fix setup
 
 help:
 	@printf "Available targets:\n"
@@ -17,6 +17,8 @@ help:
 	@printf "  make scan-report       Generate leaderboard scan report\n"
 	@printf "  make scan-report-build Build scan-report binary to bin/scan-report\n"
 	@printf "  make test              Run dashboard Go tests\n"
+	@printf "  make lint              Run dashboard golangci-lint\n"
+	@printf "  make lint-fix          Run dashboard golangci-lint with --fix\n"
 
 build: dashboard-build
 
@@ -47,6 +49,12 @@ scan-report-build:
 
 test:
 	$(GO) -C $(DASHBOARD_DIR) test ./...
+
+lint:
+	cd $(DASHBOARD_DIR) && golangci-lint run -c .golangci.yml ./...
+
+lint-fix:
+	cd $(DASHBOARD_DIR) && golangci-lint run --fix -c .golangci.yml ./...
 
 setup:
 	$(GO) -C $(DASHBOARD_DIR) mod download
