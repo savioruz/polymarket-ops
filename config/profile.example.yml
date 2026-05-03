@@ -1,0 +1,117 @@
+# polymarket-ops Profile Configuration
+# Copy this file to config/profile.yml and customize
+
+# ═══════════════════════════════
+# WALLET SETTINGS
+# ═══════════════════════════════
+
+# Your Polymarket wallet address (public, used for portfolio tracking)
+wallet_address: "0xYOUR_WALLET_ADDRESS"
+
+# Wallet type: eoa (MetaMask/hardware) or magic (email wallet)
+wallet_type: eoa
+
+# ═══════════════════════════════
+# PORTFOLIO SETTINGS
+# ═══════════════════════════════
+
+# Total portfolio size in USDC (used for position sizing calculations)
+portfolio_size: 1000
+
+# Currency display preference
+currency: USD
+
+# ═══════════════════════════════
+# RISK MANAGEMENT
+# ═══════════════════════════════
+
+# Maximum percentage of portfolio per single position
+max_position_pct: 0.10 # 10% max per trade
+
+# Maximum total portfolio exposure (sum of all open positions)
+max_total_exposure: 0.60 # 60% max total
+
+# Maximum positions in a single category (crypto, politics, sports, etc.)
+max_per_category: 3
+
+# Minimum market volume to trade (USDC)
+min_market_volume: 10000
+
+# Maximum position age for copy signals (days since whale entered)
+max_signal_age_days: 14
+
+# Maximum acceptable price slippage from whale entry (percentage)
+max_price_slippage_pct: 0.10 # 10%
+
+# ═══════════════════════════════
+# EXIT RULES
+# ═══════════════════════════════
+
+# Take profit threshold (exit when gain exceeds this)
+take_profit_pct: 0.80 # 80% gain
+
+# Stop loss threshold (exit when loss exceeds this)
+stop_loss_pct: 0.50 # 50% loss
+
+# Exit when probability exceeds this (lock in profits)
+high_probability_exit: 0.90
+
+# ═══════════════════════════════
+# COPY TRADING BEHAVIOR
+# ═══════════════════════════════
+
+# Minimum trader grade to copy (A, B, or C)
+min_trader_grade: B
+
+# Minimum signal score to copy (1.0 - 5.0)
+min_signal_score: 4.0
+
+# Auto execute trades without confirmation (DANGEROUS - leave false)
+auto_execute: false
+
+# Execution mode for order placement. Leave blank to force explicit selection.
+# Valid values: cli | chrome
+execution_mode: ""
+
+# Chrome DevTools endpoint used when execution_mode is chrome
+chrome_debug_url: "http://127.0.0.1:9222"
+
+# If Chrome is not already running with remote debugging, start it with:
+# /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
+#   --remote-debugging-port=9222
+# Then login to Polymarket and accept the DevTools connection.
+
+# Paper trading mode (log signals but never execute)
+paper_trading: true
+
+# ═══════════════════════════════
+# POSITION SIZING BY GRADE
+# ═══════════════════════════════
+
+grade_multipliers:
+  A: 1.0 # Full allocation
+  B: 0.6 # 60% of max
+  C: 0.3 # 30% of max (paper trade only by default)
+
+# ═══════════════════════════════
+# PREFERRED MARKET CATEGORIES
+# ═══════════════════════════════
+
+preferred_categories:
+  - crypto
+  - politics
+  - economics
+
+avoid_categories:
+  - sports # Higher variance, harder to research
+
+# ═══════════════════════════════
+# NOTIFICATIONS (optional)
+# ═══════════════════════════════
+
+# Minimum signal score to log/notify
+notification_threshold: 4.0
+
+# Log file location
+tracker_file: data/tracker.tsv
+positions_file: data/positions.json

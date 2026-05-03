@@ -1,0 +1,53 @@
+# config/watchlist.yml — Tracked Whale Wallets
+# Copy this file and add wallets you want to monitor
+#
+# Find top wallets with: polymarket data leaderboard --period month --order-by pnl --limit 20
+
+wallets:
+  # ─── GRADE A TRADERS ────────────────────────────────────
+
+  - address: "0xREPLACE_WITH_REAL_WALLET_1"
+    nickname: "CryptoWhale_1"
+    grade: A
+    specialty: crypto
+    notes: "Consistently profitable on BTC/ETH markets, good entry timing"
+    added_date: "2025-01-01"
+    active: true
+
+  - address: "0xREPLACE_WITH_REAL_WALLET_2"
+    nickname: "PoliticsTrader_1"
+    grade: A
+    specialty: politics
+    notes: "Top leaderboard for politics, excellent calibration"
+    added_date: "2025-01-01"
+    active: true
+
+  # ─── GRADE B TRADERS ────────────────────────────────────
+
+  - address: "0xREPLACE_WITH_REAL_WALLET_3"
+    nickname: "MultiMarket_1"
+    grade: B
+    specialty: mixed
+    notes: "Trades many categories, good win rate but smaller size"
+    added_date: "2025-01-01"
+    active: true
+
+  # ─── INACTIVE / GRADUATED OUT ───────────────────────────
+
+  - address: "0xEXAMPLE_INACTIVE_WALLET"
+    nickname: "OldWhale"
+    grade: C
+    specialty: politics
+    notes: "Was grade A but dropped off in performance last 2 months"
+    added_date: "2024-11-01"
+    active: false # Set to false to skip in batch scans
+
+
+# ─── HOW TO FIND WALLETS ─────────────────────────────────
+#
+# 1. Run: polymarket data leaderboard --period month --order-by pnl --limit 20
+# 2. Pick top wallets with consistent performance
+# 3. Verify with: polymarket data closed-positions 0xWALLET
+# 4. Add here with grade and notes
+#
+# Polymarket leaderboard: https://polymarket.com/leaderboard

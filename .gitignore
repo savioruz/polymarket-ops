@@ -1,0 +1,40 @@
+# Environment / secrets
+.env
+.envrc
+
+# User config (copy from .example files)
+config/profile.yml
+config/watchlist.yml
+
+# Generated data
+data/positions.json
+data/*.bak
+
+# Reports
+reports/
+
+# Dashboard binary
+dashboard/dashboard
+dashboard/dashboard.exe
+dashboard/watch-reports
+dashboard/watch-reports.exe
+
+# Go
+dashboard/vendor/
+
+# Binaries
+bin/
+
+# Plans
+docs/plans/
+
+# Node
+node_modules/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
